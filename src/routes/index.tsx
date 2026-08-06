@@ -162,7 +162,7 @@ function Landing() {
             ) : (
               <>
                 <Button asChild variant="ghost" size="sm" className="hidden sm:inline-flex">
-                  <Link to="/auth">Iniciar sesión</Link>
+                  <Link to="/auth" search={{ modo: undefined }}>Iniciar sesión</Link>
                 </Button>
                 <Button asChild size="sm">
                   <Link to="/auth" search={{ modo: "registro" }}>
