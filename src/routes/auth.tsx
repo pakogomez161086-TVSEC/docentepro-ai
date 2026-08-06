@@ -18,8 +18,8 @@ import { useAuth } from "@/hooks/useAuth";
 type Modo = "acceso" | "registro";
 
 export const Route = createFileRoute("/auth")({
-  validateSearch: (search: Record<string, unknown>): { modo?: Modo } => ({
-    modo: search['modo'] === "registro" ? "registro" : undefined,
+  validateSearch: (search: Record<string, unknown>): { modo: Modo } => ({
+    modo: search['modo'] === "registro" ? "registro" : "acceso",
   }),
   head: () => ({
     meta: [
