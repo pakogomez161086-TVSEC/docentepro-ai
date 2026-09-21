@@ -27,7 +27,7 @@ import {
 const principal = [{ title: "Inicio", url: "/dashboard", icon: LayoutDashboard }];
 
 const pedagogia = [
-  { title: "Proyectos de Aula", url: "/dashboard", icon: BookOpen },
+  { title: "Proyectos de Aula", url: "/proyectos", icon: BookOpen },
   { title: "IA Pedagógica", url: "/dashboard", icon: Sparkles },
   { title: "Planeación", url: "/dashboard", icon: NotebookPen },
   { title: "Sesiones", url: "/dashboard", icon: ClipboardList },
@@ -51,7 +51,7 @@ export function AppSidebar() {
         <SidebarMenu>
           {items.map((item) => (
             <SidebarMenuItem key={item.title}>
-              <SidebarMenuButton asChild isActive={pathname === item.url && item.title === "Inicio"}>
+              <SidebarMenuButton asChild isActive={pathname === item.url}>
                 <Link to={item.url} className="flex items-center gap-2.5">
                   <item.icon className="h-4 w-4" />
                   {!collapsed && <span>{item.title}</span>}
