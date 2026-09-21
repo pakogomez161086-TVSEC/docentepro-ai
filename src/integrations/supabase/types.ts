@@ -14,6 +14,47 @@ export type Database = {
   }
   public: {
     Tables: {
+      planeaciones: {
+        Row: {
+          contenido: Json
+          created_at: string
+          estado: string
+          id: string
+          proyecto_id: string | null
+          titulo: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          contenido?: Json
+          created_at?: string
+          estado?: string
+          id?: string
+          proyecto_id?: string | null
+          titulo: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          contenido?: Json
+          created_at?: string
+          estado?: string
+          id?: string
+          proyecto_id?: string | null
+          titulo?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "planeaciones_proyecto_id_fkey"
+            columns: ["proyecto_id"]
+            isOneToOne: false
+            referencedRelation: "proyectos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           avatar_url: string | null
@@ -55,6 +96,116 @@ export type Database = {
           updated_at?: string
         }
         Relationships: []
+      }
+      proyectos: {
+        Row: {
+          campo_formativo: string
+          created_at: string
+          disciplina: string
+          estado: string
+          grado: number
+          id: string
+          notas: string | null
+          ppa: string | null
+          producto_integrador: string | null
+          proyecto_academico: string | null
+          titulo: string
+          tomo: number
+          trimestre: number | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          campo_formativo: string
+          created_at?: string
+          disciplina: string
+          estado?: string
+          grado: number
+          id?: string
+          notas?: string | null
+          ppa?: string | null
+          producto_integrador?: string | null
+          proyecto_academico?: string | null
+          titulo: string
+          tomo: number
+          trimestre?: number | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          campo_formativo?: string
+          created_at?: string
+          disciplina?: string
+          estado?: string
+          grado?: number
+          id?: string
+          notas?: string | null
+          ppa?: string | null
+          producto_integrador?: string | null
+          proyecto_academico?: string | null
+          titulo?: string
+          tomo?: number
+          trimestre?: number | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      sesiones: {
+        Row: {
+          cierre: string | null
+          created_at: string
+          desarrollo: string | null
+          duracion_min: number | null
+          evaluacion: string | null
+          id: string
+          inicio: string | null
+          materiales: string | null
+          numero: number
+          planeacion_id: string
+          titulo: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          cierre?: string | null
+          created_at?: string
+          desarrollo?: string | null
+          duracion_min?: number | null
+          evaluacion?: string | null
+          id?: string
+          inicio?: string | null
+          materiales?: string | null
+          numero: number
+          planeacion_id: string
+          titulo: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          cierre?: string | null
+          created_at?: string
+          desarrollo?: string | null
+          duracion_min?: number | null
+          evaluacion?: string | null
+          id?: string
+          inicio?: string | null
+          materiales?: string | null
+          numero?: number
+          planeacion_id?: string
+          titulo?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sesiones_planeacion_id_fkey"
+            columns: ["planeacion_id"]
+            isOneToOne: false
+            referencedRelation: "planeaciones"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       user_roles: {
         Row: {
@@ -108,12 +259,12 @@ export type Tables<
   DefaultSchemaTableNameOrOptions extends
     | keyof (DefaultSchema["Tables"] & DefaultSchema["Views"])
     | { schema: keyof DatabaseWithoutInternals },
-  TableName extends DefaultSchemaTableNameOrOptions extends {
+  TableName extends (DefaultSchemaTableNameOrOptions extends {
     schema: keyof DatabaseWithoutInternals
   }
     ? keyof (DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"] &
         DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Views"])
-    : never = never,
+    : never) = never,
 > = DefaultSchemaTableNameOrOptions extends {
   schema: keyof DatabaseWithoutInternals
 }
@@ -137,11 +288,11 @@ export type TablesInsert<
   DefaultSchemaTableNameOrOptions extends
     | keyof DefaultSchema["Tables"]
     | { schema: keyof DatabaseWithoutInternals },
-  TableName extends DefaultSchemaTableNameOrOptions extends {
+  TableName extends (DefaultSchemaTableNameOrOptions extends {
     schema: keyof DatabaseWithoutInternals
   }
     ? keyof DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"]
-    : never = never,
+    : never) = never,
 > = DefaultSchemaTableNameOrOptions extends {
   schema: keyof DatabaseWithoutInternals
 }
@@ -162,11 +313,11 @@ export type TablesUpdate<
   DefaultSchemaTableNameOrOptions extends
     | keyof DefaultSchema["Tables"]
     | { schema: keyof DatabaseWithoutInternals },
-  TableName extends DefaultSchemaTableNameOrOptions extends {
+  TableName extends (DefaultSchemaTableNameOrOptions extends {
     schema: keyof DatabaseWithoutInternals
   }
     ? keyof DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"]
-    : never = never,
+    : never) = never,
 > = DefaultSchemaTableNameOrOptions extends {
   schema: keyof DatabaseWithoutInternals
 }
@@ -187,11 +338,11 @@ export type Enums<
   DefaultSchemaEnumNameOrOptions extends
     | keyof DefaultSchema["Enums"]
     | { schema: keyof DatabaseWithoutInternals },
-  EnumName extends DefaultSchemaEnumNameOrOptions extends {
+  EnumName extends (DefaultSchemaEnumNameOrOptions extends {
     schema: keyof DatabaseWithoutInternals
   }
     ? keyof DatabaseWithoutInternals[DefaultSchemaEnumNameOrOptions["schema"]]["Enums"]
-    : never = never,
+    : never) = never,
 > = DefaultSchemaEnumNameOrOptions extends {
   schema: keyof DatabaseWithoutInternals
 }
@@ -204,11 +355,11 @@ export type CompositeTypes<
   PublicCompositeTypeNameOrOptions extends
     | keyof DefaultSchema["CompositeTypes"]
     | { schema: keyof DatabaseWithoutInternals },
-  CompositeTypeName extends PublicCompositeTypeNameOrOptions extends {
+  CompositeTypeName extends (PublicCompositeTypeNameOrOptions extends {
     schema: keyof DatabaseWithoutInternals
   }
     ? keyof DatabaseWithoutInternals[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"]
-    : never = never,
+    : never) = never,
 > = PublicCompositeTypeNameOrOptions extends {
   schema: keyof DatabaseWithoutInternals
 }
