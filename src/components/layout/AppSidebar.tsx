@@ -28,9 +28,9 @@ const principal = [{ title: "Inicio", url: "/dashboard", icon: LayoutDashboard }
 
 const pedagogia = [
   { title: "Proyectos de Aula", url: "/proyectos", icon: BookOpen },
-  { title: "IA Pedagógica", url: "/dashboard", icon: Sparkles },
-  { title: "Planeación", url: "/dashboard", icon: NotebookPen },
-  { title: "Sesiones", url: "/dashboard", icon: ClipboardList },
+  { title: "IA Pedagógica", url: "/planeaciones", icon: Sparkles },
+  { title: "Planeación", url: "/planeaciones", icon: NotebookPen },
+  { title: "Sesiones", url: "/sesiones", icon: ClipboardList },
 ];
 
 const organizacion = [
