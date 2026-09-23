@@ -14,6 +14,48 @@ export type Database = {
   }
   public: {
     Tables: {
+      agenda_entradas: {
+        Row: {
+          completado: boolean
+          created_at: string
+          descripcion: string | null
+          fecha: string
+          hora: string | null
+          id: string
+          prioridad: Database["public"]["Enums"]["agenda_prioridad"]
+          tipo: Database["public"]["Enums"]["agenda_tipo"]
+          titulo: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          completado?: boolean
+          created_at?: string
+          descripcion?: string | null
+          fecha?: string
+          hora?: string | null
+          id?: string
+          prioridad?: Database["public"]["Enums"]["agenda_prioridad"]
+          tipo?: Database["public"]["Enums"]["agenda_tipo"]
+          titulo: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          completado?: boolean
+          created_at?: string
+          descripcion?: string | null
+          fecha?: string
+          hora?: string | null
+          id?: string
+          prioridad?: Database["public"]["Enums"]["agenda_prioridad"]
+          tipo?: Database["public"]["Enums"]["agenda_tipo"]
+          titulo?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       planeaciones: {
         Row: {
           contenido: Json
@@ -243,6 +285,14 @@ export type Database = {
     }
     Enums: {
       account_status: "activo" | "inactivo" | "suspendido"
+      agenda_prioridad: "baja" | "media" | "alta"
+      agenda_tipo:
+        | "tarea"
+        | "incidencia"
+        | "acuerdo"
+        | "cte"
+        | "evaluacion"
+        | "evento"
       app_role: "administrador" | "docente" | "suscriptor"
     }
     CompositeTypes: {
@@ -372,6 +422,15 @@ export const Constants = {
   public: {
     Enums: {
       account_status: ["activo", "inactivo", "suspendido"],
+      agenda_prioridad: ["baja", "media", "alta"],
+      agenda_tipo: [
+        "tarea",
+        "incidencia",
+        "acuerdo",
+        "cte",
+        "evaluacion",
+        "evento",
+      ],
       app_role: ["administrador", "docente", "suscriptor"],
     },
   },
