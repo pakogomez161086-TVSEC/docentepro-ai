@@ -269,7 +269,7 @@ function Bloque({ titulo, children }: { titulo: string; children: React.ReactNod
   );
 }
 
-function Lista({ items }: { items?: string[] }) {
+function Lista({ items }: { items?: string[] | undefined }) {
   if (!items?.length) return <p>Sin información.</p>;
   return (
     <ul className="list-disc space-y-1 pl-5">
