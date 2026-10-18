@@ -34,7 +34,7 @@ const pedagogia = [
 ];
 
 const organizacion = [
-  { title: "Agenda Docente", url: "/dashboard", icon: CalendarDays },
+  { title: "Agenda Docente", url: "/agenda", icon: CalendarDays },
   { title: "Biblioteca", url: "/dashboard", icon: Library },
   { title: "Administración", url: "/dashboard", icon: Settings },
 ];
